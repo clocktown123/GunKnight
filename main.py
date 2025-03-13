@@ -1,11 +1,12 @@
 import pygame
 import math
+from bullet_types import Bullet
 #♒︎□︎□︎♌︎◆︎⬧︎ ♑︎●︎□︎□︎♌︎◆︎⬧︎
 #i like apples and bananas
 #me too man, me too
 # nobody cares !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #i care ;-;
-
+#hiiiiii i love jay<3
 # if you want to test: copy/paste all the code into a local vscode (another window)
 # ctrl a -> ctrl c -> move windows -> ctrl a -> ctrl v
 
@@ -38,9 +39,17 @@ while running:
     player_pos.x += get_axis(pygame.K_LEFT, pygame.K_RIGHT) * player_speed
     player_pos.y += get_axis(pygame.K_UP, pygame.K_DOWN) * player_speed
 
-    for i in bullets: i.draw(); i.tick()
+    print(bullets)
+
+    #for i in bullets: i.draw(screen); i.tick()
+
     
     screen.fill("#FFFFFF")
+
+    for i in bullets:
+        i.draw(screen)
+        i.tick()
+
     pygame.draw.rect(screen, (21,21,21), (player_pos, (40, 40)))
 
     pygame.display.update()
