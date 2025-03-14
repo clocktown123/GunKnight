@@ -1,6 +1,7 @@
 import pygame
 import math
 from bullet_types import Bullet
+from Enemy import Slime, Enemy
 #♒︎□︎□︎♌︎◆︎⬧︎ ♑︎●︎□︎□︎♌︎◆︎⬧︎
 #i like apples and bananas
 #me too man, me too
@@ -13,11 +14,16 @@ from bullet_types import Bullet
 screen = pygame.display.set_mode((640, 360))
 
 player_pos = pygame.Vector2(0, 0)
+player_size = pygame.Vector2(32, 32)
 mouse_pos = pygame.Vector2(0, 0)
 player_speed = 5
 
 running = True
 clock = pygame.time.Clock()
+
+slime = Slime((600, 200), "#00FF00", (32, 32))
+
+# Skeleton = Skeleton((400, 300), (211,211,211), (50, 50))
 
 bullets = []
 
@@ -34,23 +40,23 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: running = False
         if event.type == pygame.MOUSEMOTION: mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
-        if event.type == pygame.MOUSEBUTTONDOWN: shoot(Bullet, mouse_pos, player_pos)
+        if event.type == pygame.MOUSEBUTTONDOWN: shoot(Bullet, mouse_pos, player_pos + (player_size / 2))
     
-    player_pos.x += get_axis(pygame.K_LEFT, pygame.K_RIGHT) * player_speed
-    player_pos.y += get_axis(pygame.K_UP, pygame.K_DOWN) * player_speed
-
-    print(bullets)
+    player_pos.x += get_axis(pygame.K_a, pygame.K_d) * player_speed
+    player_pos.y += get_axis(pygame.K_w, pygame.K_s) * player_speed
 
     #for i in bullets: i.draw(screen); i.tick()
-
     
     screen.fill("#FFFFFF")
 
     for i in bullets:
         i.draw(screen)
         i.tick()
+    
+    slime.tick(player_pos)
+    slime.draw(screen)
 
-    pygame.draw.rect(screen, (21,21,21), (player_pos, (40, 40)))
+    pygame.draw.rect(screen, (21,21,21), (player_pos, player_size))
 
     pygame.display.update()
 
