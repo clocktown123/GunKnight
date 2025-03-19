@@ -1,6 +1,6 @@
 import pygame
 import random
-from utils import *
+from utils import dir_to
 
 # setup_extra_vars() -> use to uh, setup extra self-scope variables
 # tick(self, target) -> ran every game tick, target should be whatever position it's targeting
@@ -33,39 +33,17 @@ class Slime(Enemy):
         self.position += dt
 
 class Skeleton(Enemy):
-    def __init__ (self, x, y,)
+    def setup_extra_vars(self):
+        self.speed = 0
     def tick(self, target):
-      
+        dt = dir_to(target, self.position) * self.speed
+        # print(dt)
+        self.position += dt
+    # def shootCD(self, ticker, shoot, Bullet, playerPos):
+    #     shoot(Bullet, playerPos, self.position + (self.size / 2))
+
+
         
 # rewrote this (-liam)
-
-# class Slime:
-#     def __init__(self, x, y, color, width, height,ticker,RIGHT,LEFT,DOWN,UP):
-#         self.x = x
-#         self.y = y
-#         self.color = color
-#         self.width = width
-#         self.height = height
-#         self.ticker= ticker
-#         self.LEFT = LEFT
-#         self.RIGHT = RIGHT
-#         self.DOWN = DOWN
-#         self.Up = UP
-
-
-#     def draw(self, screen):
-#         pygame.draw.rect(screen, (102,255,102), (self.x, self.y, self.width, self.height))
-
-#     def move(self,ticker,RIGHT,LEFT,DOWN,UP):
-#         if ticker % 40 == 0:
-#             num = random.randrange(0,4)
-#             if num ==0:
-#                 self.direction = RIGHT
-#             elif num == 1:
-#                 self.direction = LEFT
-#             if num ==2:
-#                 self.direction = DOWN
-#             elif num == 3:
-#                 self.direction = UP
        
             

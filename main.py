@@ -1,7 +1,7 @@
 import pygame
 import math
 from bullet_types import Bullet
-from Enemy import Slime, Enemy
+from Enemy import Slime, Skeleton
 #♒︎□︎□︎♌︎◆︎⬧︎ ♑︎●︎□︎□︎♌︎◆︎⬧︎
 #i like apples and bananas
 #me too man, me too
@@ -22,6 +22,9 @@ running = True
 clock = pygame.time.Clock()
 
 slime = Slime((600, 200), "#00FF00", (32, 32))
+skeleton = Skeleton((610, 310), "#808080", (20, 20))
+
+ticker = 0
 
 # Skeleton = Skeleton((400, 300), (211,211,211), (50, 50))
 
@@ -37,6 +40,7 @@ def get_axis(negative, positive):
     return pygame.key.get_pressed()[positive] - pygame.key.get_pressed()[negative]
 
 while running:
+    ticker += 1
     for event in pygame.event.get():
         if event.type == pygame.QUIT: running = False
         if event.type == pygame.MOUSEMOTION: mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
@@ -44,6 +48,10 @@ while running:
     
     player_pos.x += get_axis(pygame.K_a, pygame.K_d) * player_speed
     player_pos.y += get_axis(pygame.K_w, pygame.K_s) * player_speed
+
+    if ticker > 50:
+        ticker = 0
+        shoot(Bullet, player_pos, skeleton.position + (skeleton.size / 2))
 
     #for i in bullets: i.draw(screen); i.tick()
     
@@ -55,6 +63,8 @@ while running:
     
     slime.tick(player_pos)
     slime.draw(screen)
+
+    skeleton.draw(screen)
 
     pygame.draw.rect(screen, (21,21,21), (player_pos, player_size))
 

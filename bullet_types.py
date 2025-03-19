@@ -11,5 +11,8 @@ class Bullet:
     def tick(self):
         self.position += self.direction * 10
     
+    #def collide(self):
+
+    
     def draw(self, screen):
         pygame.draw.circle(screen, "#808080", self.position, 4)
